@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recyclophone: Broken Phone</title>
+<link href="css/brokenPageTemplate.css" rel="stylesheet" type="text/css">
+<!--The following script tag downloads a font from the Adobe Edge Web Fonts server for use within the web page. We recommend that you do not modify it.-->
+<script>var __adobewebfontsappname__="dreamweaver"</script>
+<script src="http://use.edgefonts.net/source-sans-pro:n2:default.js" type="text/javascript"></script>
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+<!-- Main Container -->
+<div class="container"> 
+  <!-- Navigation -->
+  <header> <a href="">
+    <h4 class="logo">RECYCLOPHONE</h4>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="#hero"><a href="MySite.html">HOME</a></a></li>
+        <li><a href="#about"><a href="Contact.html">CONTACT</a></a></li>
+        <li> <a href="#contact"><a href="CreateAccount.html">CREATE ACCOUNT</a></a></li>
+      </ul>
+    </nav>
+  </header>
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+  <h1 class = "hero_header" id = "money">$0</h1>
+<h2 class="hero_header">RECYCLE <span class="light">PHONE</span></h2>
+    
+    
+    <p class="tagline"><label for="textfield" style= "align-self:stretch" id = "titlez">What type of phone do you have?</label>
+   <!-- <input type="text" name="textfield" id="textfield">--></p>
+   <div id = "items"></div>
+   <div style="width:100px; margin:0 auto;">
+   <p class="tagline">
+	   <form action="#" method="post" class="phonesRadioForm" id="phonesRadioForm">
+			
+	
+			<label><input type="radio" name="phones" value="iPhone 7" id="phones_0">iPhone 7</label>
+		 <br><label><input type="radio" name="phones" value="iPhone 6" id="phones_1">iPhone 6</label>
+		 <br><label><input type="radio" name="phones" value="iPhone SE" id="phones_2">iPhone SE</label>
+		 <br><label><input type="radio" name="phones" value="iPhone 5" id="phones_3">iPhone 5</label>
+		 <br><label><input type="radio" name="phones" value="iPhone 5" id="phones_4">S6</label>
+		 <br><label><input type="radio" name="phones" value="iPhone 5" id="phones_5">S5</label>
+		 <br><label><input type="radio" name="phones" value="iPhone 5" id="phones_6">Note 4</label>
+		 <br><label><input type="radio" name="phones" value="iPhone 5" id="phones_7">Note 3</label>
+		 <br>
+
+			
+		</form>
+	   
+   </p></div><p class = "tagline" id = "itemsCheck">
+      <label><input type="checkbox" name="items" value="checkbox" id="items_0">Battery</label><br>
+      <label><input type="checkbox" name="items" value="checkbox" id="items_1">Front Camera</label><br>
+      <label><input type="checkbox" name="items" value="checkbox" id="items_2">Rear Camera</label><br>
+      <label><input type="checkbox" name="items" value="checkbox" id="items_3">SIM Card</label><br>
+    </p>
+	<p class="tagline"><button type = "button" id ="submit_btn">Submit</button></p>
+   <p class="tagline"><button type = "button" id ="cashin_btn">Cash in!</button></p>
+   <div id = "coverBtn"></div>
+   
+    <p class="tagline" id = "newBatt">
+    
+    </p>
+  <!-- Copyrights Section -->
+  <div class="copyright">&copy;2017 Recyclophone</div>
+</div>
+<!-- Main Container Ends -->
+<script type = "text/javascript">
+	
+	
+	//var phonesJ = '{"a":{"phones":"no", "phones2":"no"}}';		
+
+	var phonesJ = '{"iPhone 7":{"Battery":39.95,"Front Camera":29.95,"Rear Camera":69.95,"sim":9.95},"iPhone 6": {"Battery": 39.95,"Front Camera": 29.95,"Rear Camera": 59.95,"sim": 9.95},"iPhone SE": {"Battery": 29.95, "Front Camera": 24.95, "Rear Camera": 39.95, "sim": 9.95},"iPhone 5": {"Battery": 29.95,"Front Camera": 24.95,  "Rear Camera": 39.95,"sim": 9.95}, "S6": {"Battery": 10.80, "Front Camera": 21.33, "Rear facing camera": 13.06,"sim": 1.44}, "S5":{"Battery": 5.41,"Rear facing camera": 9.73,"Front facing camera": 4.10,"Chassis": 5.14},"Note 4": {"Charging port": 5.17,"Home button replacement": 3.83,"Back frame chassis": 3.83,"Battery": 10.80},"Note 3": {"Headphone jack": 4.1,"SIM tray": 1.84,"3200 mAh battery": 8.14,"Back frame chassis": 4.74}}';
+	
+	var phones = JSON.parse(phonesJ);
+	
+	function getRadioVal(form, name) {
+		var val;
+		// get list of radio buttons with specified name
+		var radios = form.elements[name];
+
+		// loop through list of radio buttons
+		for (var i=0, len=radios.length; i<len; i++) {
+			if ( radios[i].checked ) { // radio checked?
+				val = radios[i].value; // if so, hold its value in val
+				break; // and break out of for loop
+			}
+		}
+		return val; // return value of checked radio or undefined if none checked
+	}
+	var batOnly = false;
+	var items = [];
+	var danielp = 0;
+	function mainMethod(){
+		items = [];
+		var val = getRadioVal(document.getElementById('phonesRadioForm'), 'phones');
+		//alert(val);
+		
+		document.getElementById("items").style.visibility = "visible";
+		document.getElementById("itemsCheck").style.visibility = "visible";
+		document.getElementById("titlez").innerHTML = "Which parts of your phone are not broken?";
+		
+		var total = 0.5;
+		for(var phone in phones){
+			if(phone == val){
+				var j = 0;
+				for(var i in phones[phone]){
+					
+					console.log(i);
+					var price = phones[phone][i];
+					var btnName = 'items_' + j;
+					console.log("button name: " + "" + btnName);
+					if(document.getElementById(btnName).checked){//check if checkbox is checked
+						total += price/2;
+						items.push(true);
+						
+					}else{
+						items.push(false);
+					}
+					//alert("Total Value: " + price);
+					j++;
+				}
+			}
+			//console.log("the one: " + phones[phone]["phones"]);
+			//console.log(phones[phone]);
+		}
+	//alert("total value: " + total);
+		for (var obj in items){
+			console.log("wwww" + obj);
+		}
+		if(items[0] == true && items[1] == false && items[2] == false && items[3] == false){
+			
+			document.getElementById("newBatt").innerHTML = "Instead of recycling your phone, we recommend that you simply replace your battery. Visit our store to spend your points on a recycled battery for your phone!";
+		}
+		document.getElementById("money").innerHTML = "$" + total.toFixed(2);
+		danielp = total;
+		document.getElementById("coverBtn").style.visibility = "hidden";
+	}
+	
+
+	
+
+	console.log(document);
+	var el = document.getElementById("submit_btn");
+	var el2 = document.getElementById("cashin_btn");
+	
+	function loaded(){
+		el.addEventListener("click", mainMethod);
+	}
+	
+	window.onload = loaded();
+</script>
+</body>
+</html>
